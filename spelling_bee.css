@@ -1,6 +1,69 @@
+@font-face {
+    font-family: 'David CLM';
+    src: url('fonts/davidclm-bold.woff2') format('woff2'),
+         url('fonts/davidclm-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'David CLM';
+    src: url('fonts/davidclm-bolditalic.woff2') format('woff2'),
+         url('fonts/davidclm-bolditalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'David CLM';
+    src: url('fonts/davidclm-mediumitalic.woff2') format('woff2'),
+         url('fonts/davidclm-mediumitalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'David CLM';
+    src: url('fonts/davidclm-medium.woff2') format('woff2'),
+         url('fonts/davidclm-medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fira GO';
+    src: url('fonts/FiraGO-Book.woff2') format('woff2'),
+         url('fonts/FiraGO-Book.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Fira GO';
+    src: url('fonts/FiraGO-BookItalic.woff2') format('woff2'),
+         url('fonts/FiraGO-BookItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Fira GO';
+    src: url('fonts/FiraGO-Bold.woff2') format('woff2'),
+         url('fonts/FiraGO-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Fira GO';
+    src: url('fonts/FiraGO-BoldItalic.woff2') format('woff2'),
+         url('fonts/FiraGO-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+
 * {
     margin: 0;
     padding: 0;
+    direction: rtl;
   }
   body {
     align-content:center;
@@ -93,7 +156,7 @@
     font-weight: 800;
     font-size:1.4em;
     color:black;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'David CLM', serif;
     
   }
 /*** HEX HOVER *****************************************************************/
@@ -125,13 +188,13 @@
     
     height:50px; 
     text-align: center;  
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'David CLM', serif;
     font-size: 1.5rem;
     padding-top:3px;
   }
 
   #cursor {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'David CLM', serif;
     font-size: 1.5rem;
     font-weight: 100;
     height:6vw;
@@ -150,11 +213,11 @@ h1 {
   margin-top:4vh; 
   margin-bottom:1vhpx; 
   font-size: 1.5rem;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Fira GO', sans-serif;
 }
 
 .scoreText {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'David CLM', serif;
   font-size: 15px;
   font-weight:100;
   align-self:center;
@@ -167,7 +230,7 @@ ul {
 }
 
 #discoveredText {
-  font-family: 'Open Sans',  sans-serif;
+  font-family: 'David CLM',  serif;
   font-size: 15px;
   align-self:center;
   display:flex;
@@ -268,6 +331,6 @@ ul {
   align-items:center;
   justify-content:center;
   border-radius:3px;
-  font-family: 'Calibri Light',sans-serif;
-  font-size: .6em;
+  font-family: 'David CLM', serif;
+  font-size: 1em;
 }

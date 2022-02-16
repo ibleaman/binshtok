@@ -5,28 +5,27 @@
 
 <html>
     <head>
-        <title>Spelling Bee</title>
+        <title>דער בינשטאָק</title>
         <link rel="stylesheet" href = "spelling_bee.css">
         <link rel="icon" href="/cute_bee.png" type="image/icon type">
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto+Slab:300,400,500,600,700&display=swap" rel="stylesheet">
     </head>
     <body onload="get_valid_words()" onkeydown="input_from_keyboard(event)">
-        <h1> Spelling Bee Game</h1>
+        <h1>דער בינשטאָק</h1>
 
         <!-- NOTIFICATIONS -->
         <div class="container" style="height:50px; align-items:center;">
           <div>
-            <p id="too-short" class="notifications">Too Short</p>
-            <p id="good" class="notifications">Good! <span class="points"></span></p>
-            <p id="great" class="notifications">Great! <span class="points"></span></p>
-            <p id="amazing" class="notifications">Amazing! <span class="points"></span></p>
-            <p id="pangram" class="notifications">Pangram! <span class="points"></span></p>
-            <p id="already-found" class="notifications">Already Found</p>
-            <p id="invalid-word" class="notifications">Invalid Word</p>
-            <p id="miss-center" class="notifications">Missing Center Letter</p>
+            <p id="too-short" class="notifications">צו װײניק אותיות</p>
+            <p id="good" class="notifications">גוט! <span class="points"></span></p>
+            <p id="great" class="notifications">װוּנדערלעך! <span class="points"></span></p>
+            <p id="amazing" class="notifications">אױסגעצײכנט! <span class="points"></span></p>
+            <p id="pangram" class="notifications">פּאַנגראַם! <span class="points"></span></p>
+            <p id="already-found" class="notifications">שױן געפֿונען</p>
+            <p id="invalid-word" class="notifications">אומגילטיק</p>
+            <p id="miss-center" class="notifications">עס פֿעלט דער מיטנדיקער אות</p>
           </div>
         
         </div>
@@ -42,20 +41,20 @@
             <ul id="hexGrid"></ul>
         
             <div class="button_container">
-              <button id="submit_button" type="button" class="button" onclick="submitWord()">Enter</button>
+              <button id="submit_button" type="button" class="button" onclick="submitWord()">אַרײַנגעבן</button>
               <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
                 <img src="shuffle_icon.png" style="width:1.2em">
               
               </button>
-              <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Delete</button>
+              <button id="delete_button" type="button" class="button" onclick="deleteLetter()">אױסמעקן</button>
                 <!--<i style="align-self:center;"></i>-->
               
             </div>
         </div>
         <div class="container" style="height:400px; justify-content:normal;" id="scoreboard">
-              <div class="scoreText" style="margin-bottom:8px;">You have found <span id="numfound">0</span> word(s).</div>
-              <div class="scoreText" style="margin-bottom:8px;">Score: <span id="score">0</span>/<span id="maxscore">0</span>.</div>
-              <div style=" font-family: 'Open Sans', sans-serif; align-self:center; font-size: 15px; font-style:bold;  text-decoration: underline;">Words Discovered</div>
+              <div class="scoreText" style="margin-bottom:8px;">דו האָסט שױן געפֿונען <span id="numfound">0</span> װערטער.</div>
+              <div class="scoreText" style="margin-bottom:8px;">דער חשבון: <span id="score">0</span> פֿון <span id="maxscore">0</span> מעגלעכע פּונקטן.</div>
+              <div style=" font-family: 'David CLM', serif; align-self:center; font-size: 15px; font-weight:bold;">אַנטדעקטע װערטער</div>
               <div id="discoveredText" >
               </div>
         </div>
