@@ -28,6 +28,4 @@ yarn-error.log*
 *.py
 *.txt
 
-*.json
-
 test.js
