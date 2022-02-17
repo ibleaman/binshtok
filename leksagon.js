@@ -218,22 +218,24 @@ function submitWord(){
   let score = 0;
   var isPangram = false;
   var showScore = document.getElementById("totalScore");
-
-  if(tryword.innerHTML.length < 4){ 
+  
+  var tryword_fixed = replaceWithPrecombined(tryword.innerHTML);
+  
+  if(tryword_fixed.length < 4){ 
     wrongInput("#too-short");
-  }else if(discoveredWords.includes(tryword.innerHTML.toLowerCase())){
+  }else if(discoveredWords.includes(tryword_fixed.toLowerCase())){
     wrongInput("#already-found");
-  }else if(!tryword.innerHTML.toLowerCase().includes(centerLetter.toLowerCase())){
+  }else if(!tryword_fixed.toLowerCase().includes(centerLetter.toLowerCase())){
     wrongInput("#miss-center");
 
-  }else if(validWords.includes(tryword.innerHTML.toLowerCase())){
+  }else if(validWords.includes(tryword_fixed.toLowerCase())){
 
-    var isPangram = checkPangram(tryword.innerHTML);
-    score = calculateWordScore(tryword.innerHTML, isPangram);
+    var isPangram = checkPangram(tryword_fixed);
+    score = calculateWordScore(tryword_fixed, isPangram);
     addToTotalScore(score);
     console.log("totalscore: " + totalScore);
     
-    showDiscoveredWord(tryword.innerHTML);
+    showDiscoveredWord(tryword_fixed);
     var discoveredWordsAsJSONString = JSON.stringify(discoveredWords);
     setCookie("discoveredwords", discoveredWordsAsJSONString, 365);
     numFound++;
@@ -242,10 +244,10 @@ function submitWord(){
     document.getElementById("score").innerHTML = totalScore;
     setCookie("totalscore", totalScore, 365);
 
-    var l = tryword.innerHTML.length;
+    var l = tryword_fixed.length;
     if(isPangram){
       rightInput("#pangram");
-      showPoints(17);
+      showPoints(l + 7);
     }else if(l < 5){
       rightInput("#good");
       showPoints(1);
@@ -270,7 +272,6 @@ function showDiscoveredWord(input){
     if(input != "") {
       discoveredWords.push(input.toLowerCase());
     }
-    discoveredWords.sort() 
     while(discText.firstChild){
       discText.removeChild(discText.firstChild);
     }
@@ -380,15 +381,46 @@ function input_from_keyboard(event) {
   if(event.keyCode == 8) {
     deleteLetter();
   }
-
+  
   //validation for just alphabet letters input
-  if(event.keyCode >= 97 && event.keyCode <= 122 ||
+  else if(event.keyCode >= 97 && event.keyCode <= 122 ||
     event.keyCode >=65 && event.keyCode <=90) {
-    tryword.innerHTML = tryword.innerHTML+ String.fromCharCode(event.keyCode).toLowerCase();
-    if(checkIncorrectLetters(tryword.innerHTML)) {
-      tryword.style.color = 'grey';
-    }
+      tryword.innerHTML = tryword.innerHTML+ event.key;
   }
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function replaceWithPrecombined(word) {
+  var replacements = {
+    "וּ": "וּ",
+    "יִ": "יִ",
+    "ײַ": "ײַ",
+    "ייַ": "ײַ",
+    "וו": "װ",
+    "וי": "ױ",
+    "יי": "ײ",
+    "אַ": "אַ",
+    "אָ": "אָ",
+    "פּ": "פּ",
+    "פֿ": "פֿ",
+    "בֿ": "בֿ",
+    "תּ": "תּ",
+    "שׂ": "שׂ",
+    "כּ": "כּ",
+    "בּ": "ב",
+    "ך": "כ",
+    "ם": "מ",
+    "ן": "נ",
+    "ף": "פֿ",
+    "ץ": "צ"
+  };
+  for (var letter_decomposed in replacements) {
+    word = replaceAll(word, letter_decomposed, replacements[letter_decomposed]);
+  }
+  return word;
 }
 
 function setCookie(cname, cvalue, exdays) {
