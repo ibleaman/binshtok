@@ -28,6 +28,7 @@ if (discoveredWords != "") {
 } else {
   discoveredWords = [];
 }
+var discoveredText = getCookie("discoveredtext");
 var totalScore = getCookie("totalscore");
 if (totalScore != "") {
   totalScore = parseInt(totalScore);
@@ -37,7 +38,12 @@ if (totalScore != "") {
 var pangram = "";
 var centerLetter = "";
 var cursor = true;
-var numFound = 0;
+var numFound = getCookie("numfound");
+if (numFound != "") {
+  totalScore = parseInt(numFound);
+} else {
+  numFound = 0;
+}
 var maxscore = 0;
 setInterval(() => {
   if(cursor) {
@@ -83,6 +89,16 @@ function get_valid_words(){
 
 function initialize_score(){
   document.getElementById("maxscore").innerHTML = String(maxscore);
+  
+  if (numFound > 0) {
+    document.getElementById("numfound").innerHTML = numFound;
+  }
+  if (totalScore > 0) {
+    document.getElementById("score").innerHTML = totalScore;
+  }
+  if (discoveredText.trim().length != 0) {
+    document.getElementById("discoveredText").innerHTML = discoveredText;
+  }
 }
 //Creates the hexagon grid of 7 letters with middle letter as special color
 function initialize_letters(){
@@ -233,11 +249,13 @@ function submitWord(){
     console.log("totalscore: " + totalScore);
     
     showDiscoveredWord(tryword.innerHTML);
+    var discoveredWordsAsJSONString = JSON.stringify(discoveredWords);
+    setCookie("discoveredwords", discoveredWordsAsJSONString, 30);
     numFound++;
+    setCookie("numfound", numFound, 30);
     document.getElementById("numfound").innerHTML = numFound;
     document.getElementById("score").innerHTML = totalScore;
-    
-    setCookie("totalscore", totalScore, 7);
+    setCookie("totalscore", totalScore, 30);
 
     var l = tryword.innerHTML.length;
     if(isPangram){
@@ -264,14 +282,14 @@ function submitWord(){
 function showDiscoveredWord(input){
     
     var discText = document.getElementById("discoveredText");
-    discoveredWords.push(input.toLowerCase());
+    setCookie("discoveredtext", discText, 30);
+    if(input != "") {
+      discoveredWords.push(input.toLowerCase());
+    }
     discoveredWords.sort() 
     while(discText.firstChild){
       discText.removeChild(discText.firstChild);
     }
-    
-    var discoveredWordsAsJSONString = JSON.stringify(discoveredWords);
-    setCookie("discoveredwords", discoveredWordsAsJSONString, 7);
 
     var numFound = discoveredWords.length; 
     var numCol = Math.ceil(numFound/6);
