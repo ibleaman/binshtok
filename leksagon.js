@@ -17,7 +17,7 @@ var centerLetter = "";
 var cursor = true;
 var numFound = getCookie("numfound");
 if (numFound != "") {
-  totalScore = parseInt(numFound);
+  numFound = parseInt(numFound);
 } else {
   numFound = 0;
 }
