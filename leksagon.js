@@ -1,26 +1,11 @@
 var validWords = [];
 var letters = "";
-var discoveredWords = getCookie("discoveredwords");
-if (discoveredWords != "") {
-  discoveredWords = JSON.parse(discoveredWords);
-} else {
-  discoveredWords = [];
-}
-var totalScore = getCookie("totalscore");
-if (totalScore != "") {
-  totalScore = parseInt(totalScore);
-} else {
-  totalScore = 0;
-}
-var pangram = "";
+var discoveredWords = [];
+var totalScore = 0;
+var pangram = getCookie("pangram");
 var centerLetter = "";
 var cursor = true;
-var numFound = getCookie("numfound");
-if (numFound != "") {
-  numFound = parseInt(numFound);
-} else {
-  numFound = 0;
-}
+var numFound = 0;
 var maxscore = 0;
 setInterval(() => {
   if(cursor) {
@@ -49,7 +34,32 @@ function get_valid_words(){
           console.log(data)
           letters = data['letters'];
           validWords = data['possible_words'];
-          pangram = data['pangram'];
+          if (pangram != data['pangram']) {
+            pangram = data['pangram'];
+            setCookie("pangram", pangram, 365);
+            setCookie("discoveredwords", JSON.stringify([]), 365);
+            setCookie("totalscore", 0, 365);
+            setCookie("numfound", 0, 365);
+          } else {
+            discoveredWords = getCookie("discoveredwords");
+            if (discoveredWords != "") {
+              discoveredWords = JSON.parse(discoveredWords);
+            } else {
+              discoveredWords = [];
+            }
+            totalScore = getCookie("totalscore");
+            if (totalScore != "") {
+              totalScore = parseInt(totalScore);
+            } else {
+              totalScore = 0;
+            }
+            numFound = getCookie("numfound");
+            if (numFound != "") {
+              numFound = parseInt(numFound);
+            } else {
+              numFound = 0;
+            }
+          }
           maxscore = data['maxscore'];
           initialize_letters();
           initialize_score();
@@ -225,12 +235,12 @@ function submitWord(){
     
     showDiscoveredWord(tryword.innerHTML);
     var discoveredWordsAsJSONString = JSON.stringify(discoveredWords);
-    setCookie("discoveredwords", discoveredWordsAsJSONString, 30);
+    setCookie("discoveredwords", discoveredWordsAsJSONString, 365);
     numFound++;
-    setCookie("numfound", numFound, 30);
+    setCookie("numfound", numFound, 365);
     document.getElementById("numfound").innerHTML = numFound;
     document.getElementById("score").innerHTML = totalScore;
-    setCookie("totalscore", totalScore, 30);
+    setCookie("totalscore", totalScore, 365);
 
     var l = tryword.innerHTML.length;
     if(isPangram){
