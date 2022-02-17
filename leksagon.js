@@ -1,25 +1,3 @@
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  let expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 var validWords = [];
 var letters = "";
 var discoveredWords = getCookie("discoveredwords");
@@ -28,7 +6,6 @@ if (discoveredWords != "") {
 } else {
   discoveredWords = [];
 }
-var discoveredText = getCookie("discoveredtext");
 var totalScore = getCookie("totalscore");
 if (totalScore != "") {
   totalScore = parseInt(totalScore);
@@ -92,12 +69,10 @@ function initialize_score(){
   
   if (numFound > 0) {
     document.getElementById("numfound").innerHTML = numFound;
+    showDiscoveredWord('');
   }
   if (totalScore > 0) {
     document.getElementById("score").innerHTML = totalScore;
-  }
-  if (discoveredText.trim().length != 0) {
-    document.getElementById("discoveredText").innerHTML = discoveredText;
   }
 }
 //Creates the hexagon grid of 7 letters with middle letter as special color
@@ -282,7 +257,6 @@ function submitWord(){
 function showDiscoveredWord(input){
     
     var discText = document.getElementById("discoveredText");
-    setCookie("discoveredtext", discText, 30);
     if(input != "") {
       discoveredWords.push(input.toLowerCase());
     }
@@ -405,4 +379,26 @@ function input_from_keyboard(event) {
       tryword.style.color = 'grey';
     }
   }
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
