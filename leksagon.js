@@ -1,7 +1,39 @@
-var validWords=[];
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+var validWords = [];
 var letters = "";
-var discoveredWords =[];
-var totalScore = 0;
+var discoveredWords = getCookie("discoveredwords");
+if (discoveredWords != "") {
+  discoveredWords = JSON.parse(discoveredWords);
+} else {
+  discoveredWords = [];
+}
+var totalScore = getCookie("totalscore");
+if (totalScore != "") {
+  totalScore = parseInt(totalScore);
+} else {
+  totalScore = 0;
+}
 var pangram = "";
 var centerLetter = "";
 var cursor = true;
@@ -204,6 +236,8 @@ function submitWord(){
     numFound++;
     document.getElementById("numfound").innerHTML = numFound;
     document.getElementById("score").innerHTML = totalScore;
+    
+    setCookie("totalscore", totalScore, 7);
 
     var l = tryword.innerHTML.length;
     if(isPangram){
@@ -235,6 +269,9 @@ function showDiscoveredWord(input){
     while(discText.firstChild){
       discText.removeChild(discText.firstChild);
     }
+    
+    var discoveredWordsAsJSONString = JSON.stringify(discoveredWords);
+    setCookie("discoveredwords", discoveredWordsAsJSONString, 7);
 
     var numFound = discoveredWords.length; 
     var numCol = Math.ceil(numFound/6);
