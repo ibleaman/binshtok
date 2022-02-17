@@ -269,6 +269,7 @@ ul {
   font-size: .8em;
   border-radius:30px;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .button:hover {
