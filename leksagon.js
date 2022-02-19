@@ -30,8 +30,8 @@ function get_valid_words(){
       try {
         var data = JSON.parse(this.response);
         //3 is LOADING, 4 is DONE
-        if(request.readyState == 3 && request.status == 200){
-          console.log(data)
+        if (request.readyState == 3 && request.status == 200){
+          // console.log(data);
           letters = data['letters'];
           validWords = data['possible_words'];
           if (pangram != data['pangram']) {
@@ -63,7 +63,7 @@ function get_valid_words(){
           maxscore = data['maxscore'];
           initialize_letters();
           initialize_score();
-          console.log(validWords);
+          // console.log(validWords);
 
         }
       } 
@@ -168,18 +168,15 @@ function shuffleLetters() {
 var clickLetter = function(letter){
   return function curried_func(e){
     var tryword = document.getElementById("testword");
-    tryword.innerHTML = tryword.innerHTML + letter.toLowerCase();
+    document.getElementById('testword').value = document.getElementById('testword').value + letter.toLowerCase();
   }
 }
 
 //Deletes the last letter of the string in the textbox
 function deleteLetter(){
   var tryword = document.getElementById("testword");
-  var trywordTrimmed = tryword.innerHTML.substring(0, tryword.innerHTML.length-1);
-  tryword.innerHTML = trywordTrimmed
-  if(!checkIncorrectLetters(trywordTrimmed)) {
-      tryword.style.color = 'black';
-  }
+  var trywordTrimmed = tryword.value.substring(0, tryword.value.length-1);
+  tryword.value = trywordTrimmed;
 }
 
 function wrongInput(selector){
@@ -200,7 +197,7 @@ function rightInput(selector){
 }
 
 function clearInput(){
-  $("#testword").empty();
+  document.getElementById('testword').value = '';
 }
 
 function showPoints(pts){
@@ -219,7 +216,7 @@ function submitWord(){
   var isPangram = false;
   var showScore = document.getElementById("totalScore");
   
-  var tryword_fixed = replaceWithPrecombined(tryword.innerHTML);
+  var tryword_fixed = replaceWithPrecombined(tryword.value);
   
   if(tryword_fixed.length < 4){ 
     wrongInput("#too-short");
@@ -370,22 +367,9 @@ function checkIncorrectLetters(input) {
   return false;
 }
 
-//takes keyboard event from user and determines what should be done
-function input_from_keyboard(event) {
-  var tryword = document.getElementById("testword");
-
+function pressEnter() {
   if(event.keyCode == 13) {
     submitWord();
-  }
-
-  if(event.keyCode == 8) {
-    deleteLetter();
-  }
-  
-  //validation for just alphabet letters input
-  else if(event.keyCode >= 97 && event.keyCode <= 122 ||
-    event.keyCode >=65 && event.keyCode <=90) {
-      tryword.innerHTML = tryword.innerHTML+ event.key;
   }
 }
 
