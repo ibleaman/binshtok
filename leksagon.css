@@ -182,7 +182,7 @@
       grid-column-start: 1;
   }
 
-/*** INPUT & CURSOR ********************************************************************/
+/*** INPUT ********************************************************************/
 
   #testword {
     
@@ -192,20 +192,13 @@
     font-size: 1.5rem;
     padding-top:3px;
   }
-
-  #cursor {
-    font-family: 'David CLM', serif;
-    font-size: 1.5rem;
-    font-weight: 100;
-    height:6vw;
-    color: rgb(255, 187, 0);
   
-  }
-  .cursor {
+  .inputbox {
     position: relative;
     margin: 0 auto;
     margin-bottom:10px; 
   }
+
 
 /*** TEXT **********************************************************************/
 h1 {
