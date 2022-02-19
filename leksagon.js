@@ -359,6 +359,9 @@ function pressEnter() {
   if(event.keyCode == 13) {
     submitWord();
   }
+  if(event.keyCode == 8) {
+    deleteLetter();
+  }
 }
 
 function replaceAll(str, find, replace) {
