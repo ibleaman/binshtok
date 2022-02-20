@@ -18,7 +18,20 @@ function get_valid_words(){
     request.setRequestHeader("Content-type", "text/plain");
     request.onreadystatechange = function(){
       try {
-        var data = JSON.parse(this.response);
+        var puzzles = JSON.parse(this.response);
+        var most_recent_puzzle_date = Object.keys(puzzles).sort().reverse()[0];
+        
+        // did user specify a date? else, get most recent puzzle
+        queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const date = urlParams.get('date');
+        
+        if (date !== null) {
+          var data = puzzles[date];
+        } else {
+          var data = puzzles[most_recent_puzzle_date];
+        }
+        
         //3 is LOADING, 4 is DONE
         if (request.readyState == 3 && request.status == 200){
           // console.log(data);
