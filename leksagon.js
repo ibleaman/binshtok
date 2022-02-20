@@ -77,6 +77,29 @@ function get_valid_words(){
     request.send();
 }
 
+//function to check for mobile user
+function detectMob() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+    
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+
+setInterval(function(){
+ var focusbox;
+ focusbox = document.getElementById("testword");
+ focusbox.focus();
+});
+
 function initialize_score(){
   document.getElementById("maxscore").innerHTML = String(maxscore);
   

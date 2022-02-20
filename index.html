@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<meta charset="UTF-8">
         <title>לעקסאַגאָן</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href = "leksagon.css">
@@ -41,7 +42,7 @@
         <!-- INPUT WORD -->
         
         <div class="inputbox">
-          <input id="testword" type="text" oninput="overwriteInput(this);" />
+          <input id="testword" type="text" oninput="overwriteInput(this);" onfocus="if (detectMob()) { blur(); };"/>
         </div>
         
         <!-- HEXAGON GRID -->
