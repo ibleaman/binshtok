@@ -396,7 +396,12 @@ function replaceNonfinalForms(word) {
     "ם(?!$)": "מ",
     "ן(?!$)": "נ",
     "ף(?!$)": "פֿ",
-    "ץ(?!$)": "צ"
+    "ץ(?!$)": "צ",
+    "^ך": "כ",
+    "^ם": "מ",
+    "^ן": "נ",
+    "^ף": "פֿ",
+    "^ץ": "צ"
   };
   for (var form in final_forms) {
     word = word.replace(new RegExp(form), final_forms[form]);
