@@ -390,7 +390,12 @@ function replaceNonfinalForms(word) {
     "מ$": "ם",
     "נ$": "ן",
     "פֿ$": "ף",
-    "צ$": "ץ"
+    "צ$": "ץ",
+    "ך(?!$)": "כ",
+    "ם(?!$)": "מ",
+    "ן(?!$)": "נ",
+    "ף(?!$)": "פֿ",
+    "ץ(?!$)": "צ"
   };
   for (var form in final_forms) {
     word = word.replace(new RegExp(form), final_forms[form]);
@@ -426,6 +431,32 @@ function replaceWithPrecombined(word) {
     word = replaceAll(word, letter_decomposed, replacements[letter_decomposed]);
   }
   return word;
+}
+
+function overwriteInput(input) {
+  let val = input.value;
+  var replacements = {
+    "וּ": "וּ",
+    "יִ": "יִ",
+    "ײַ": "ײַ",
+    "ייַ": "ײַ",
+    "וו": "װ",
+    "וי": "ױ",
+    "יי": "ײ",
+    "אַ": "אַ",
+    "אָ": "אָ",
+    "פּ": "פּ",
+    "פֿ": "פֿ",
+    "בֿ": "בֿ",
+    "תּ": "תּ",
+    "שׂ": "שׂ",
+    "כּ": "כּ",
+    "בּ": "ב",
+  };
+  for (var letter_decomposed in replacements) {
+    val = replaceAll(val, letter_decomposed, replacements[letter_decomposed]);
+  }
+  input.value = replaceNonfinalForms(val);
 }
 
 // custom alphabetical order
