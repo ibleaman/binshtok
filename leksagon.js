@@ -462,7 +462,38 @@ function overwriteInput(input) {
   for (var letter_decomposed in replacements) {
     val = replaceAll(val, letter_decomposed, replacements[letter_decomposed]);
   }
-  input.value = replaceNonfinalForms(val);
+  val = replaceNonfinalForms(val);
+  input.value = removeInvalidLetters(val);
+}
+
+function removeInvalidLetters(word) {
+  var output = '';
+  var user_letters = word.split('');
+  var valid_letters = letters.join('').split('');
+  if (valid_letters.includes('כ')) {
+    valid_letters.push('ך');
+  }
+  if (valid_letters.includes('מ')) {
+    valid_letters.push('ם');
+  }
+  if (valid_letters.includes('נ')) {
+    valid_letters.push('ן');
+  }
+  if (valid_letters.includes('פֿ')) {
+    valid_letters.push('ף');
+  }
+  if (valid_letters.includes('צ')) {
+    valid_letters.push('ץ');
+  }
+
+  for (let i = 0; i < user_letters.length; i++) {
+    if (valid_letters.includes(user_letters[i])) {
+      output += user_letters[i];
+    } else {
+      $( "#testword" ).effect("shake", {times:2.5}, 450);
+    }
+  }
+  return output;
 }
 
 // custom alphabetical order
