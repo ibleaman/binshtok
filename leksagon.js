@@ -26,7 +26,7 @@ function get_valid_words(){
         const urlParams = new URLSearchParams(queryString);
         const date = urlParams.get('date');
         
-        if (date !== null) {
+        if (date !== null && puzzles.hasOwnProperty(date)) {
           var data = puzzles[date];
         } else {
           var data = puzzles[most_recent_puzzle_date];
