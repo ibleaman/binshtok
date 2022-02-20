@@ -1,5 +1,9 @@
 # spelling_bee
 
+This is a Yiddish fork of a Spelling Bee clone created by [lzha97](https://github.com/lzha97/) that can be found [here](https://github.com/lzha97/spelling_bee). See the original description below.
+
+<hr>
+
 ### Project Origin
 This project is based off of NYT's [Spelling Bee Puzzles](https://www.nytimes.com/puzzles/spelling-bee).
 <br>You must have NYT puzzle membership to play the game on New York Times.
