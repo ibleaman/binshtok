@@ -256,6 +256,9 @@ function showDiscoveredWord(input){
     var discText = document.getElementById("discoveredText");
     if(input != "") {
       discoveredWords.push(input.toLowerCase());
+      discoveredWords.sort(function(a, b) {
+          return translate(a, "אאַאָבבֿגדהווּװױזחטייִײײַכּכךלמםנןסעפּפֿףצץקרששׂתּת").localeCompare(translate(b, "אאַאָבבֿגדהווּװױזחטייִײײַכּכךלמםנןסעפּפֿףצץקרששׂתּת"));//custom alphabetical order
+      });
     }
     while(discText.firstChild){
       discText.removeChild(discText.firstChild);
@@ -284,7 +287,7 @@ function showDiscoveredWord(input){
       for(var i=0; i<n; i++){
         var listword = document.createElement("LI");
         var pword = document.createElement("P");
-        pword.innerHTML = respellNonfinalForms(discoveredWords[w]); 
+        pword.innerHTML = replaceNonfinalForms(discoveredWords[w]); 
         listword.appendChild(pword);
         list.appendChild(listword);
         w++;
@@ -368,7 +371,7 @@ function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
-function respellNonfinalForms(word) {
+function replaceNonfinalForms(word) {
   var final_forms = {
     "כ$": "ך",
     "מ$": "ם",
@@ -410,6 +413,15 @@ function replaceWithPrecombined(word) {
     word = replaceAll(word, letter_decomposed, replacements[letter_decomposed]);
   }
   return word;
+}
+
+// custom alphabetical order
+// from: https://stackoverflow.com/questions/28711653/sorting-string-function-by-custom-alphabet-javascript
+function translate(str, alphabet) {
+    var abc = "אאַאָבבֿגדהווּװױזחטייִײײַכּכךלמםנןסעפּפֿףצץקרששׂתּת";
+    return [].map.call(str, function(c) {
+        return alphabet[abc.indexOf(c)] || c;
+    }).join("");
 }
 
 function setCookie(cname, cvalue, exdays) {
