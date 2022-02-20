@@ -172,6 +172,7 @@ var clickLetter = function(letter){
   return function curried_func(e){
     var tryword = document.getElementById("testword");
     document.getElementById('testword').value = document.getElementById('testword').value + letter.toLowerCase();
+    overwriteInput(document.getElementById('testword'));
   }
 }
 
