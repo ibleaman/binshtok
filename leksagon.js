@@ -486,7 +486,8 @@ function overwriteInput(input) {
     val = replaceAll(val, letter_decomposed, replacements[letter_decomposed]);
   }
   val = replaceNonfinalForms(val);
-  input.value = removeInvalidLetters(val);
+  //val = removeInvalidLetters(val);
+  input.value = val;
 }
 
 function removeInvalidLetters(word) {
